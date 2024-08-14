@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue File</title>
+    <link rel="stylesheet" href="./master.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>This is the message : {{ message }}</h1>
+      <p>The age is {{ age }}</p>
+
+      <button @click="age++">Increase age</button>
+      <button @click="age--">Decrease age</button>
+      <button @click="changeMessage('Bye Vue')">Change the message</button>
+      <div class="user" v-if="logged">Hello Bakhodir</div>
+      <div class="user" v-else>Hello Guest</div>
+      <div class="user">
+        <div v-show="logged">Hello Bakhodir</div>
+        The differnce between v-show and v-if is that v-show is css display
+        property and v-if is javascript
+        <button @click="logged = !logged">
+          <span v-if="logged">Logout</span>
+          <span v-else>Login</span>
+        </button>
+      </div>
+
+      <div class="box" @mouseover="handleEvent($event, 5)">
+        mouseover (enter)
+      </div>
+      <div class="box" @mouseleave="handleEvent">mouseleave (leave)</div>
+      <div class="box" @dblclick="handleEvent">double click</div>
+      <div class="box" @mousemove="handleMouseMove">
+        position - {{ x }} {{ y }}
+      </div>
+
+      <a :href="url">Google</a>
+      <div v-if="filtered" class="favorite-books">
+        <h1>Favourite Books</h1>
+
+        <div class="books">
+          <div
+            @click="toggleFav(book)"
+            :class="{fav: book.isFav}"
+            v-for="book in filteredBooks"
+          >
+            <img :src="book.img" :alt="book.title" alt="book.title" />
+            <h3>{{book.title}}</h3>
+            <p>{{book.author}}</p>
+          </div>
+        </div>
+      </div>
+      <div v-else class="just-books">
+        <h1>Books</h1>
+
+        <div class="books">
+          <div
+            @click="toggleFav(book)"
+            :class="{fav: book.isFav}"
+            v-for="book in books"
+          >
+            <img :src="book.img" :alt="book.title" alt="book.title" />
+            <h3>{{book.title}}</h3>
+            <p>{{book.author}}</p>
+          </div>
+        </div>
+      </div>
+
+      <button @click="filtered = !filtered">
+        <span v-if="!filtered">Show Favorite Books</span>
+        <span v-else>Show All Books</span>
+      </button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
